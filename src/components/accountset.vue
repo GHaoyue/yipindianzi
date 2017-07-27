@@ -106,8 +106,9 @@
 			
         },
         mounted: function () {        	 //DOM加载完成事件
-        	this.form.name = cookie.getcookie('realName');
-        	this.form.id = cookie.getcookie('userId');
+        	var user = JSON.parse(unescape(cookie.getcookie('user')));
+        	this.form.name = user.realName;
+        	this.form.id = user.userId;
         }
     }
 </script>

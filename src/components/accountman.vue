@@ -174,7 +174,7 @@
         		var _this = this;
         		this.$alert('确认删除？', '删除账号', {
 		          confirmButtonText: '确定',
-		          callback: action => {
+		          callback: function(action) {
 		            if(action == 'cancel'){
 		          		_this.$message({
 				          showClose: true,

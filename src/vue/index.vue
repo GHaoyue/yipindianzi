@@ -60,9 +60,9 @@
 					          type: 'error'
 					        });
 			            }else{
-			            	document.cookie="roles="+JSON.stringify(response.body.roles);
-			            	document.cookie="userId="+response.body.userId;
-			            	document.cookie="realName="+response.body.realName;
+			            	document.cookie="user="+escape(JSON.stringify(response.body));
+			            	/*document.cookie="userId="+escape(response.body.userId);
+			            	document.cookie="realName="+escape(response.body.realName);*/
 			            	localStorage.setItem('addr', response.body.addr);//地址
 			            	localStorage.setItem('belong', response.body.belong);//1是本公司，2是客户
 							if(response.body.birthday == null){

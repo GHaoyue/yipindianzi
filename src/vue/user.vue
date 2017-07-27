@@ -76,19 +76,19 @@
         	}else if(href[1] == "accpintman"){
         		classedit.addClass(menua[2].getElementsByTagName('p')[0],'useractive');
         	}
-        	for (let i=0;i<menua.length;i++) {
+        	for (var i=0;i<menua.length;i++) {
         		menua[i].addEventListener('click',function(){
-        			for (let i=0;i<menua.length;i++) {
-        				classedit.removeClass(menua[i].getElementsByTagName('p')[0],'useractive');
+        			for (var a=0;a<menua.length;a++) {
+        				classedit.removeClass(menua[a].getElementsByTagName('p')[0],'useractive');
         			}
         			classedit.addClass(this.getElementsByTagName('p')[0],'useractive');
         		});
         	}
         	
-        	var rolesdata = JSON.parse(cookie.getcookie('roles'));
-        	this.name = cookie.getcookie('realName');
-        	for (let i=0;i<rolesdata.length;i++) {
-        		if(rolesdata[i].rid == "r100"){
+        	var user = JSON.parse(unescape(cookie.getcookie('user')));
+        	this.name = user.realName;
+        	for (var i=0;i<user.roles.length;i++) {
+        		if(user.roles[i].rid == "r100"){
         			this.menuitem[2].roles = true;
         		}
         	}

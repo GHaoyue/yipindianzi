@@ -88,7 +88,6 @@
         	},
         	update:function(){
         		var _this = this;
-        		console.log(this.form);
         		console.log(new Date(this.birthday).getTime().toString());
         		this.form.birthday = new Date(this.birthday).getTime().toString();
         		this.$http.post(myurl.messageupdate,this.form,{emulateJSON: true})
@@ -128,14 +127,13 @@
 			
         },
         mounted: function () {        	 //DOM加载完成事件
-        	this.form.userID = cookie.getcookie('userId');
-        	
-        	this.form.realName = localStorage.getItem('realName');
-        	this.form.sex = localStorage.getItem('sex')+"";
-        	this.birthday = localStorage.getItem('birthday');
-        	console.log(localStorage.getItem('birthday'));
-        	this.form.phone = localStorage.getItem('phone');
-        	this.form.addr = localStorage.getItem('addr');
+        	var user = JSON.parse(unescape(cookie.getcookie('user')));
+        	this.form.userID = user.userId;
+        	this.form.realName = user.realName;
+        	this.form.sex = user.sex;
+        	this.birthday = user.birthday;
+        	this.form.phone = user.phone;
+        	this.form.addr = user.addr;
 			        	
         }
     }

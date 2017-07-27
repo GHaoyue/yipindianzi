@@ -4,8 +4,8 @@
 		<div class="mytable-title">
 			<div class="title-left">
 				<el-button @click="add" type="primary" icon="plus">添加</el-button>
-				<el-button @click="edit" class="mytable-edit" v-if="editshow" type="primary" icon="edit">编辑</el-button>
-				<el-button @click="remove" class="mytable-edit" v-if="editshow" type="primary" icon="delete">删除</el-button>
+				<el-button @click="edit" class="mytable-edit" v-if="editshow && editbut.edit" type="primary" icon="edit">编辑</el-button>
+				<el-button @click="remove" class="mytable-edit" v-if="editshow && editbut.remove" type="primary" icon="delete">删除</el-button>
 				<el-upload
 				  class="upload-demo"
 				  :show-file-list="false"
@@ -62,6 +62,12 @@
 			},
 			'othercolumn':{//是否显示操作列
 				default:false
+			},
+			'editbut':{
+				default:{
+					'edit':true,
+					'remove':true
+				}
 			}
 		},
 		data:function(){
@@ -103,7 +109,7 @@
 				}
 		    	var reg = eval(new RegExp(pattern));//字符串转正则表达式
 		    	var tableall = [];//存放筛选后的临时数据
-		    	for(let i=0;i<this.searchtableall.length;i++){
+		    	for(var i=0;i<this.searchtableall.length;i++){
 		    		var lstablecolumn = this.searchtableall[i];
 		    		var result = reg.exec(lstablecolumn[this.select]);
 		    		if(result != null){

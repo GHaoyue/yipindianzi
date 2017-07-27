@@ -9,8 +9,7 @@
 	</div>
 		<div class="slockmsgcontent">
 			<my-table-one :tabledataurl="tabledataurl" :tablecolumn="tablecolumn" :selectdata="selectdata"
-				:othercolumn="true" @selected="selected"  >
-			
+				:editbut="{'edit':false,'remove':false}" :othercolumn="true" @selected="selected"  >
 			    <el-table-column
 			      prop="flag"
 			      label="标签"
@@ -81,7 +80,7 @@
 			}
 		},
 		methods:{
-			filterTag(value, row) {
+			filterTag:function(value, row) {
 		        return row.tag === value;
 		    },
 		    selected:function(val){

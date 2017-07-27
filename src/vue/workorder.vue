@@ -30,7 +30,7 @@
 		</div>
 		<div class="content" v-loading="tablelogin" element-loading-text="拼命加载中" >
 			<my-table-one :tabledataurl="tabledataurl" :tablecolumn="tablecolumn" :selectdata="selectdata"
-				:othercolumn="true" @selected="selected" @add="add" @edit="edit" @remove="remove">
+				:editbut="{'edit':false,'remove':false}" :othercolumn="true" @selected="selected" @add="add" @edit="edit" @remove="remove">
 				<el-table-column 
 			    	property="order.materiel.mName"
       				label="产品名称">
@@ -226,7 +226,7 @@
 		        	function (response){  
 		        		console.log(response);
 		        		_this.orderoptions = [];
-		        		for (let i=0;i<response.body.length;i++) {
+		        		for (var i=0;i<response.body.length;i++) {
 	        				var linshi = {};
 		        			linshi.value = response.body[i].oid;
 		        			linshi.label = response.body[i].ownNub;

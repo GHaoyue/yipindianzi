@@ -51,27 +51,27 @@
         },
         mounted: function () {        	 //DOM加载完成事件
     		classedit.addClass(document.getElementById(this.message),"active");
-    		var rolesdata = JSON.parse(cookie.getcookie('roles'));
-        	for (let i=0;i<rolesdata.length;i++) {
-        		if(rolesdata[i].rid == "r1"){
+    		var user = JSON.parse(unescape(cookie.getcookie('user')));
+        	for (var i=0;i<user.roles.length;i++) {
+        		if(user.roles[i].rid == "r1"){
         			this.menulist[1].roles = true;
         		}
-        		if(rolesdata[i].rid == "r2"){
+        		if(user.roles[i].rid == "r2"){
         			this.menulist[2].roles = true;
         		}
-        		if(rolesdata[i].rid == "r3"){
+        		if(user.roles[i].rid == "r3"){
         			this.menulist[3].roles = true;
         		}
-        		if(rolesdata[i].rid == "r4"){
+        		if(user.roles[i].rid == "r4"){
         			this.menulist[4].roles = true;
         		}
-        		if(rolesdata[i].rid == "r5"){
+        		if(user.roles[i].rid == "r5"){
         			this.menulist[5].roles = true;
         		}
-        		if(rolesdata[i].rid == "r6"){
+        		if(user.roles[i].rid == "r6"){
         			this.menulist[6].roles = true;
         		}
-        		if(rolesdata[i].rid == "r7"){
+        		if(user.roles[i].rid == "r7"){
         			this.menulist[7].roles = true;
         		}
         	}

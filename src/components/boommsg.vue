@@ -36,8 +36,7 @@
 		</el-dialog>
 		<div class="boomcontent" v-loading="tablelogin" element-loading-text="拼命加载中" >
 			<my-table-one :tabledataurl="tabledataurl" :tablecolumn="tablecolumn" :selectdata="selectdata"
-					:othercolumn="true" @selected="selected" @add="add" @edit="edit" @remove="remove">
-	
+				:editbut="{'edit':false,'remove':true}" :othercolumn="true" @selected="selected" @add="add" @edit="edit" @remove="remove">
 			</my-table-one>			
 		</div>
 	</div>
@@ -46,6 +45,7 @@
 <script>
 	import myurl from '../json/myurl.json';
 	import MyTableOne from '../components/MyTableOne.vue';
+	import { cookie } from '../other/cookie.js';
 	var tablecolumn = [
 		{
 			property:"bid",
@@ -135,7 +135,7 @@
 					"nub":"",
 					"mid":"",
 					"pmid":this.$route.query.mid,
-					"user":localStorage.getItem('realName')
+					"user":JSON.parse(unescape(cookie.getcookie('user'))).realName
 				},
 				tablelogin:false,
             	tablethis:"",  
@@ -260,7 +260,7 @@
 	        		console.log(response);
 	        		/*_this.materiel = response.body;*/
 	        		_this.options = [];
-	        		for (let i=0;i<response.body.length;i++) {
+	        		for (var i=0;i<response.body.length;i++) {
 	        			if(this.$route.query.mid != response.body[i].mid){
 	        				var linshi = {};
 	        				linshi.value = response.body[i].mid;

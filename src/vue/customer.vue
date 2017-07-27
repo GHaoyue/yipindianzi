@@ -2,11 +2,10 @@
 <template>
 	<div class="customer">
 		<el-dialog title="客户信息" :visible.sync="dialogFormVisible">
-			
-		    <el-form ref="form" :model="form" label-width="80px">
-		    <el-form-item label="客户编号">
-			  <el-input v-model="form.cNub"></el-input>
-			</el-form-item>
+		    <el-form ref="form" :model="form" :rules="rules" label-width="80px">
+			    <el-form-item label="客户编号"  prop="cNub">
+				  <el-input v-model="form.cNub"></el-input>
+				</el-form-item>
 			  <el-form-item label="客户名称">
 			    <el-input v-model="form.cName"></el-input>
 			  </el-form-item>
@@ -22,11 +21,9 @@
 			  <el-form-item label="传真">
 			    <el-input v-model="form.fax"></el-input>
 			  </el-form-item>
-			  
 			  <el-form-item label="发货地址">
 			    <el-input v-model="form.ship_addr"></el-input>
 			  </el-form-item>
-			  
 			  <el-form-item label="证书上传">
 			  <el-upload
 			  class="upload-demo"
@@ -41,7 +38,7 @@
 			
 		  <div slot="footer" class="dialog-footer">
 		    <el-button @click="clearl">取 消</el-button>
-		    <el-button type="primary" @click="addcustomer">确 定</el-button>
+		    <el-button type="primary" @click="addcustomer('form')">确 定</el-button>
 		  </div>
 		</el-dialog>
 		
@@ -50,7 +47,7 @@
 		</div>
 		<div class="content" v-loading="tablelogin"  element-loading-text="拼命加载中">
 			<my-table-one :tabledataurl="tabledataurl" :tablecolumn="tablecolumn" :selectdata="selectdata"
-				:othercolumn="true" @selected="selected" @add="add" @edit="edit" @remove="remove">
+				:editbut="{'edit':false,'remove':true}" :othercolumn="true" @selected="selected" @add="add" @edit="edit" @remove="remove">
 				<el-table-column
 			      label="联系人"
 			      width="100">
@@ -67,18 +64,6 @@
 			    <el-table-column 
 			    	property="credentials"
       				label="有效证书">
-			    </el-table-column>
-			    
-				<el-table-column label="其他">
-			    	<template scope="scope">
-				      	<el-button
-				      		type="text"
-				      		@click.native.prevent="seleteother(scope.row)"
-				      	    size="small">
-				      	 	 查看
-				      	</el-button>
-				      	
-				    </template>
 			    </el-table-column>
 			</my-table-one>
 		</div>
@@ -139,6 +124,12 @@
             		"credentials":"",
             		
             		
+            	},
+            	rules:{
+            		cNub:[
+            			{ required: true, message: '请输入活动名称', trigger: 'blur' },
+            			{ min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
+            		]
             	},
             	fileList: [],
             	tablelogin:false,
@@ -227,7 +218,19 @@
 			        }
 		        });
 		    },
-		    addcustomer:function(){
+		    addcustomer:function(formName){
+		    	var formv = true;
+		    	this.$refs[formName].validate(function(valid) {
+		          if (valid) {
+		          	formv = true;
+		          } else {
+		            formv = false;
+		            return false;
+		          }
+		        });
+		        if(!formv){
+		        	return;
+		        }
 		    	var _this = this;
 	      		this.$http.post(myurl.customercreate,this.form,{emulateJSON: true})
 		        .then(

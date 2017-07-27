@@ -53,7 +53,7 @@
 	</el-dialog>
 		<div class="ordermsg-content" v-loading="tablelogin" element-loading-text="拼命加载中" >
 			<my-table-one :tabledataurl="tabledataurl" :tablecolumn="tablecolumn" :selectdata="selectdata"
-				:othercolumn="true" @selected="selected" @add="add" @edit="edit" @remove="remove">
+				:editbut="{'edit':false,'remove':true}" :othercolumn="true" @selected="selected" @add="add" @edit="edit" @remove="remove">
 				<el-table-column
 			      label="产品数量"
 			      width="100">
@@ -283,7 +283,7 @@
 	        .then(
 	        	function (response){
 	        		_this.customeroptions = [];
-	        		for (let i=0;i<response.body.length;i++) {
+	        		for (var i=0;i<response.body.length;i++) {
 	        			var linshi = {};
 	        			linshi.value = response.body[i].cid;
 	        			linshi.label2 = response.body[i].cNub;
@@ -302,7 +302,7 @@
 	        .then(
 	        	function (response){
 	        		_this.productoptions = [];
-	        		for (let i=0;i<response.body.length;i++) {
+	        		for (var i=0;i<response.body.length;i++) {
 	        			var linshi = {};
 	        			linshi.value = response.body[i].mid;
 	        			linshi.label2 = response.body[i].mnub;

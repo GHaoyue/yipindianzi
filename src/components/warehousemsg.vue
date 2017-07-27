@@ -51,9 +51,7 @@
 		
 		<div class="content">
 			<my-table-one :tabledataurl="tabledataurl" :tablecolumn="tablecolumn" :selectdata="selectdata"
-				:othercolumn="true" @selected="selected" @add="add" @edit="edit" >
-				
-				
+				:editbut="{'edit':false,'remove':true}" :othercolumn="true" @selected="selected" @add="add" @edit="edit" >
 			    <el-table-column 
 				    property="unit"
 	      			label="单位">
@@ -227,7 +225,7 @@
 		        	function (response){  
 		        		
 		        		_this.select = [];
-		        		for (let i=0;i<response.body.length;i++) {
+		        		for (var i=0;i<response.body.length;i++) {
 	        				var linshi = {};
 		        			linshi.value = response.body[i].mid;
 		        			linshi.label = response.body[i].mName;
@@ -250,7 +248,7 @@
 		        	function (response){  
 		        		console.log(response)
 		        		_this.please = [];
-		        		for (let i=0;i<response.body.length;i++) {
+		        		for (var i=0;i<response.body.length;i++) {
 	        				var linshi = {};
 		        			linshi.value = response.body[i].oid;
 		        			linshi.label = response.body[i].ownNub;
